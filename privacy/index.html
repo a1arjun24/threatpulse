@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — ThreatPulse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080A0F;
+      --bg2: #0D0F14;
+      --card: #111318;
+      --border: #1E2230;
+      --border2: #252A3A;
+      --primary: #1D9E75;
+      --text: #E8EAF0;
+      --text2: #9BA3B8;
+      --text3: #5A6178;
+      --font-display: 'Syne', sans-serif;
+      --font-mono: 'DM Mono', monospace;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 48px;
+      background: rgba(8,10,15,0.9);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-logo-icon {
+      width: 34px; height: 34px;
+      border-radius: 9px;
+      overflow: hidden;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    .nav-logo-icon img { width: 100%; height: 100%; object-fit: cover; }
+
+    .nav-back {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text3);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+
+    .nav-back:hover { color: var(--text); }
+
+    /* ── HERO ── */
+    .page-hero {
+      padding: 140px 48px 60px;
+      max-width: 800px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .page-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      color: var(--primary);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .page-title {
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .page-meta {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text3);
+    }
+
+    /* ── CONTENT ── */
+    .content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 60px 48px 100px;
+    }
+
+    .summary-card {
+      background: var(--card);
+      border: 1px solid var(--border2);
+      border-left: 3px solid var(--primary);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 56px;
+    }
+
+    .summary-card p {
+      font-size: 15px;
+      color: var(--text2);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .summary-card strong {
+      color: var(--primary);
+      font-weight: 500;
+    }
+
+    /* Sections */
+    .policy-section {
+      margin-bottom: 52px;
+      padding-bottom: 52px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .policy-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .section-number {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    p {
+      font-size: 15px;
+      color: var(--text2);
+      line-height: 1.75;
+      font-weight: 300;
+      margin-bottom: 14px;
+    }
+
+    p:last-child { margin-bottom: 0; }
+
+    /* Data table */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 13px;
+    }
+
+    .data-table th {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: var(--text3);
+      text-align: left;
+      padding: 10px 16px;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border2);
+    }
+
+    .data-table td {
+      padding: 12px 16px;
+      color: var(--text2);
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      font-weight: 300;
+      line-height: 1.5;
+    }
+
+    .data-table tr:last-child td { border-bottom: none; }
+
+    .data-table tr:nth-child(even) td { background: rgba(255,255,255,0.01); }
+
+    .tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 400;
+    }
+
+    .tag.none {
+      background: rgba(29,158,117,0.12);
+      color: var(--primary);
+      border: 1px solid rgba(29,158,117,0.25);
+    }
+
+    /* Contact card */
+    .contact-card {
+      background: var(--card);
+      border: 1px solid var(--border2);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-top: 20px;
+    }
+
+    .contact-card a {
+      color: var(--primary);
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-size: 13px;
+    }
+
+    .contact-card a:hover { text-decoration: underline; }
+
+    /* Footer */
+    footer {
+      background: var(--card);
+      border-top: 1px solid var(--border);
+      padding: 32px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-brand {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 16px;
+    }
+
+    .footer-sub {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text3);
+      margin-top: 4px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 28px;
+    }
+
+    .footer-links a {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text3);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      .page-hero { padding: 110px 20px 48px; }
+      .page-title { font-size: 32px; }
+      .content { padding: 40px 20px 80px; }
+      .data-table { font-size: 12px; }
+      .data-table th, .data-table td { padding: 10px 12px; }
+      footer { flex-direction: column; gap: 20px; padding: 28px 20px; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="../">
+      <div class="nav-logo-icon">
+        <img src="../logo.png" alt="ThreatPulse" />
+      </div>
+      ThreatPulse
+    </a>
+    <a class="nav-back" href="../">← Back to home</a>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <p class="page-eyebrow">Legal</p>
+    <h1 class="page-title">Privacy Policy</h1>
+    <p class="page-meta">Last updated: April 16, 2026 · Kray Kray Studios</p>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- TL;DR Summary -->
+    <div class="summary-card">
+      <p><strong>The short version:</strong> ThreatPulse does not collect, sell, or share your personal data. Your vendor stack and preferences are stored locally on your device. The app makes API calls to public government databases and an AI provider to deliver threat intelligence. No account required. No tracking.</p>
+    </div>
+
+    <!-- 1. Overview -->
+    <div class="policy-section">
+      <p class="section-number">01</p>
+      <h2 class="section-title">Overview</h2>
+      <p>ThreatPulse ("the app") is developed and operated by Kray Kray Studios, based in Ottawa, Canada. This Privacy Policy describes how ThreatPulse handles information when you use our iOS application.</p>
+      <p>We are committed to protecting your privacy. ThreatPulse is designed with a privacy-first approach — your data stays on your device, and we do not build profiles, run analytics, or sell data to third parties.</p>
+    </div>
+
+    <!-- 2. Data We Collect -->
+    <div class="policy-section">
+      <p class="section-number">02</p>
+      <h2 class="section-title">Data We Collect</h2>
+      <p>ThreatPulse collects minimal data. The table below summarizes what is stored and where.</p>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>DATA TYPE</th>
+            <th>WHERE STORED</th>
+            <th>SHARED?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Your first name (optional, for personalized greeting)</td>
+            <td>On-device only (UserDefaults)</td>
+            <td><span class="tag none">Never</span></td>
+          </tr>
+          <tr>
+            <td>Your vendor stack selections</td>
+            <td>On-device only (UserDefaults)</td>
+            <td><span class="tag none">Never</span></td>
+          </tr>
+          <tr>
+            <td>CVEs marked as confirmed patched</td>
+            <td>On-device only (UserDefaults)</td>
+            <td><span class="tag none">Never</span></td>
+          </tr>
+          <tr>
+            <td>Bookmarked news articles</td>
+            <td>On-device only (UserDefaults)</td>
+            <td><span class="tag none">Never</span></td>
+          </tr>
+          <tr>
+            <td>Daily threat score history</td>
+            <td>On-device only (UserDefaults)</td>
+            <td><span class="tag none">Never</span></td>
+          </tr>
+          <tr>
+            <td>Intel AI chat messages</td>
+            <td>Sent to Groq API for processing, not stored</td>
+            <td><span class="tag">See §4</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>We do not collect your email address, phone number, location, device identifiers, or any other personally identifiable information.</p>
+    </div>
+
+    <!-- 3. Third-Party APIs -->
+    <div class="policy-section">
+      <p class="section-number">03</p>
+      <h2 class="section-title">Third-Party Data Sources</h2>
+      <p>ThreatPulse fetches threat intelligence from the following public APIs. These calls are made on your behalf to deliver the app's core functionality.</p>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>SERVICE</th>
+            <th>PURPOSE</th>
+            <th>DATA SENT</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>NIST National Vulnerability Database (NVD)</td>
+            <td>CVE data for your vendor stack</td>
+            <td>Vendor keyword search terms</td>
+          </tr>
+          <tr>
+            <td>CISA Known Exploited Vulnerabilities</td>
+            <td>Active exploitation alerts</td>
+            <td>None (public JSON feed)</td>
+          </tr>
+          <tr>
+            <td>RSS News Feeds (The Hacker News, Krebs, BleepingComputer, Dark Reading, others)</td>
+            <td>Cybersecurity news</td>
+            <td>None (public RSS feeds)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>NVD and CISA are operated by the U.S. federal government and are free public services. No personal data is transmitted to these services.</p>
+    </div>
+
+    <!-- 4. AI Assistant -->
+    <div class="policy-section">
+      <p class="section-number">04</p>
+      <h2 class="section-title">Intel AI Assistant</h2>
+      <p>The Intel AI tab is powered by Groq, Inc., using the Llama 3.3 70B language model. When you send a message to the Intel AI assistant, your message is transmitted to Groq's API for processing and a response is returned to the app.</p>
+      <p>We recommend not including personal, confidential, or sensitive business information in your AI queries. Messages are processed by Groq in accordance with their privacy policy, available at <strong>groq.com</strong>.</p>
+      <p>ThreatPulse does not log, store, or review your Intel AI conversations. Chat history exists only in-app memory for the duration of your session and is not persisted between app launches.</p>
+    </div>
+
+    <!-- 5. Subscriptions -->
+    <div class="policy-section">
+      <p class="section-number">05</p>
+      <h2 class="section-title">Subscriptions & Payments</h2>
+      <p>ThreatPulse Pro is available as an auto-renewing subscription managed entirely through Apple's App Store. All billing, payment processing, and subscription management is handled by Apple. Kray Kray Studios does not receive or store your payment information.</p>
+      <p>To manage or cancel your subscription, visit your Apple ID settings or the App Store subscriptions page.</p>
+    </div>
+
+    <!-- 6. Children -->
+    <div class="policy-section">
+      <p class="section-number">06</p>
+      <h2 class="section-title">Children's Privacy</h2>
+      <p>ThreatPulse is intended for use by security professionals and is not directed at children under the age of 13. We do not knowingly collect any information from children. If you believe a child has provided information through the app, please contact us and we will take appropriate action.</p>
+    </div>
+
+    <!-- 7. Data Retention -->
+    <div class="policy-section">
+      <p class="section-number">07</p>
+      <h2 class="section-title">Data Retention & Deletion</h2>
+      <p>All data stored by ThreatPulse lives on your device in Apple's UserDefaults system. You can delete all app data at any time by uninstalling ThreatPulse from your device. This permanently removes your vendor stack, preferences, and all locally stored information.</p>
+      <p>Since we do not operate a server or account system, there is no remote data to delete.</p>
+    </div>
+
+    <!-- 8. Changes -->
+    <div class="policy-section">
+      <p class="section-number">08</p>
+      <h2 class="section-title">Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time. Any changes will be reflected on this page with an updated date. We encourage you to review this policy periodically. Continued use of ThreatPulse after changes constitutes acceptance of the updated policy.</p>
+    </div>
+
+    <!-- 9. Contact -->
+    <div class="policy-section">
+      <p class="section-number">09</p>
+      <h2 class="section-title">Contact Us</h2>
+      <p>If you have any questions or concerns about this Privacy Policy or how ThreatPulse handles data, please reach out:</p>
+      <div class="contact-card">
+        <p style="margin-bottom: 8px; color: var(--text); font-weight: 400;">Kray Kray Studios</p>
+        <p style="margin-bottom: 4px;"><a href="mailto:support@kraykraystudios.com">support@kraykraystudios.com</a></p>
+        <p><a href="https://a1arjun24.github.io/threatpulse">a1arjun24.github.io/threatpulse</a></p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      <div class="footer-brand">ThreatPulse</div>
+      <div class="footer-sub">by Kray Kray Studios · Ottawa, Canada</div>
+    </div>
+    <div class="footer-links">
+      <a href="../">Home</a>
+      <a href="mailto:support@kraykraystudios.com">Support</a>
+      <a href="#">App Store</a>
+    </div>
+  </footer>
+
+</body>
+</html>
