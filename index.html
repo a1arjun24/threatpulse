@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ThreatPulse — Your Daily Threat Briefing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080A0F;
+      --bg2: #0D0F14;
+      --card: #111318;
+      --border: #1E2230;
+      --border2: #252A3A;
+      --primary: #1D9E75;
+      --primary-dim: rgba(29,158,117,0.12);
+      --primary-glow: rgba(29,158,117,0.35);
+      --critical: #E24B4A;
+      --critical-dim: rgba(226,75,74,0.12);
+      --warning: #F0A500;
+      --warning-dim: rgba(240,165,0,0.12);
+      --info: #378ADD;
+      --text: #E8EAF0;
+      --text2: #9BA3B8;
+      --text3: #5A6178;
+      --font-display: 'Syne', sans-serif;
+      --font-mono: 'DM Mono', monospace;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 48px;
+      background: rgba(8,10,15,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: -0.3px;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-logo-icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .nav-logo-icon img { width: 100%; height: 100%; object-fit: cover; }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 14px;
+      padding: 10px 22px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      letter-spacing: 0.2px;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text2);
+      border: 1px solid var(--border2);
+    }
+
+    .btn-ghost:hover {
+      color: var(--text);
+      border-color: var(--text3);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: #22b585;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px var(--primary-glow);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 140px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Radial glow behind hero */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(ellipse, rgba(29,158,117,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Pulse rings */
+    .pulse-rings {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(29,158,117,0.15);
+      transform: translate(-50%, -50%);
+      animation: pulseRing 4s ease-out infinite;
+    }
+
+    .ring:nth-child(1) { width: 300px; height: 300px; animation-delay: 0s; }
+    .ring:nth-child(2) { width: 500px; height: 500px; animation-delay: 1s; }
+    .ring:nth-child(3) { width: 700px; height: 700px; animation-delay: 2s; }
+    .ring:nth-child(4) { width: 900px; height: 900px; animation-delay: 3s; }
+
+    @keyframes pulseRing {
+      0% { opacity: 0.6; transform: translate(-50%, -50%) scale(0.95); }
+      100% { opacity: 0; transform: translate(-50%, -50%) scale(1.05); }
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 2.5px;
+      color: var(--primary);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.2s;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(52px, 8vw, 96px);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.4s;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, #E24B4A 0%, #F0A500 50%, #1D9E75 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--text2);
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.6s;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 80px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.8s;
+    }
+
+    .app-store-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--text);
+      color: var(--bg);
+      padding: 12px 24px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 15px;
+      transition: all 0.2s ease;
+    }
+
+    .app-store-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(232,234,240,0.2);
+    }
+
+    .app-store-btn svg { width: 20px; height: 20px; }
+
+    /* Live ticker */
+    .hero-ticker {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text3);
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 1s;
+    }
+
+    .ticker-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--critical);
+      animation: blink 1.5s ease infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* ── MOCK PHONE ── */
+    .hero-phone {
+      position: relative;
+      width: 280px;
+      margin: 0 auto 0;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 1.2s;
+    }
+
+    .phone-frame {
+      background: var(--card);
+      border: 1px solid var(--border2);
+      border-radius: 44px;
+      padding: 14px;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.04),
+        0 40px 80px rgba(0,0,0,0.6),
+        0 0 60px rgba(29,158,117,0.08);
+    }
+
+    .phone-screen {
+      background: var(--bg2);
+      border-radius: 32px;
+      overflow: hidden;
+      padding: 20px 16px;
+    }
+
+    .phone-notch {
+      width: 80px;
+      height: 24px;
+      background: var(--card);
+      border-radius: 12px;
+      margin: 0 auto 16px;
+    }
+
+    .phone-score-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .phone-score-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--text3);
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .phone-score {
+      font-family: var(--font-display);
+      font-size: 42px;
+      font-weight: 800;
+      color: var(--critical);
+      line-height: 1;
+    }
+
+    .phone-score-sub {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--critical);
+      opacity: 0.7;
+      margin-top: 2px;
+    }
+
+    .phone-badge {
+      background: var(--critical-dim);
+      border: 1px solid rgba(226,75,74,0.25);
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--critical);
+    }
+
+    .phone-divider {
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 12px;
+    }
+
+    .phone-section-label {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      letter-spacing: 1.5px;
+      color: var(--text3);
+      margin-bottom: 8px;
+    }
+
+    .phone-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 6px;
+    }
+
+    .phone-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .phone-card-vendor {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .phone-card-score {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+    }
+
+    .phone-card-desc {
+      font-size: 9px;
+      color: var(--text3);
+      line-height: 1.4;
+    }
+
+    .score-crit { color: var(--critical); }
+    .score-warn { color: var(--warning); }
+    .score-info { color: var(--info); }
+    .score-ok { color: var(--primary); }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: var(--card);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 32px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .stat-item {
+      flex: 1;
+      text-align: center;
+      padding: 0 40px;
+      border-right: 1px solid var(--border);
+    }
+
+    .stat-item:last-child { border-right: none; }
+
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text3);
+      letter-spacing: 1px;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 100px 48px;
+    }
+
+    .section-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      color: var(--primary);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .section-sub {
+      font-size: 16px;
+      color: var(--text2);
+      line-height: 1.7;
+      max-width: 560px;
+      font-weight: 300;
+    }
+
+    /* ── FEATURES GRID ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-top: 60px;
+    }
+
+    .feature-card {
+      background: var(--card);
+      padding: 36px 32px;
+      transition: background 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent, var(--primary)), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .feature-card:hover { background: #13151C; }
+    .feature-card:hover::before { opacity: 1; }
+
+    .feature-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .feature-title {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: -0.2px;
+    }
+
+    .feature-desc {
+      font-size: 14px;
+      color: var(--text2);
+      line-height: 1.65;
+      font-weight: 300;
+    }
+
+    /* ── BRIEF MY CUSTOMER ── */
+    .bmc-section {
+      background: var(--card);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .bmc-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 100px 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .bmc-report {
+      background: #0D0F14;
+      border: 1px solid var(--border2);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+    }
+
+    .bmc-report-header {
+      background: #111318;
+      border-bottom: 1px solid var(--border);
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .bmc-report-title {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .bmc-report-date {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text3);
+    }
+
+    .bmc-report-body {
+      padding: 20px;
+    }
+
+    .bmc-stat-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .bmc-stat {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .bmc-stat-val {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .bmc-stat-lbl {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--text3);
+      letter-spacing: 0.5px;
+    }
+
+    .bmc-vendor-row {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .bmc-vendor-name {
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .bmc-vendor-meta {
+      font-family: var(--font-mono);
+      font-size: 10px;
+    }
+
+    /* ── PRICING ── */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 60px;
+      max-width: 700px;
+    }
+
+    .pricing-card {
+      background: var(--card);
+      border: 1px solid var(--border2);
+      border-radius: 16px;
+      padding: 32px;
+      position: relative;
+    }
+
+    .pricing-card.featured {
+      border-color: var(--primary);
+      box-shadow: 0 0 40px rgba(29,158,117,0.12);
+    }
+
+    .pricing-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--primary);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      padding: 4px 14px;
+      border-radius: 20px;
+    }
+
+    .pricing-tier {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--text3);
+      margin-bottom: 12px;
+    }
+
+    .pricing-price {
+      font-family: var(--font-display);
+      font-size: 40px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .pricing-price span {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text3);
+      letter-spacing: 0;
+    }
+
+    .pricing-desc {
+      font-size: 13px;
+      color: var(--text3);
+      margin-bottom: 24px;
+      font-weight: 300;
+    }
+
+    .pricing-features {
+      list-style: none;
+    }
+
+    .pricing-features li {
+      font-size: 13px;
+      color: var(--text2);
+      padding: 7px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 300;
+    }
+
+    .pricing-features li:last-child { border-bottom: none; }
+
+    .pricing-features li::before {
+      content: '✓';
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+
+    .pricing-features li.muted {
+      color: var(--text3);
+    }
+
+    .pricing-features li.muted::before {
+      content: '—';
+      color: var(--text3);
+    }
+
+    /* ── DATA SOURCES ── */
+    .sources-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 40px;
+    }
+
+    .source-pill {
+      background: var(--card);
+      border: 1px solid var(--border2);
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text2);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .source-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--primary);
+      flex-shrink: 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--card);
+      border-top: 1px solid var(--border);
+      padding: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-brand {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    .footer-sub {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text3);
+      margin-top: 4px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 32px;
+    }
+
+    .footer-links a {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text3);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── WAVEFORM ── */
+    .waveform {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      height: 32px;
+    }
+
+    .wave-bar {
+      width: 3px;
+      border-radius: 2px;
+      background: var(--primary);
+      animation: wave 1.4s ease-in-out infinite;
+    }
+
+    .wave-bar:nth-child(1) { height: 8px; animation-delay: 0s; }
+    .wave-bar:nth-child(2) { height: 18px; animation-delay: 0.1s; }
+    .wave-bar:nth-child(3) { height: 28px; animation-delay: 0.2s; }
+    .wave-bar:nth-child(4) { height: 14px; animation-delay: 0.3s; }
+    .wave-bar:nth-child(5) { height: 22px; animation-delay: 0.4s; }
+    .wave-bar:nth-child(6) { height: 10px; animation-delay: 0.5s; }
+    .wave-bar:nth-child(7) { height: 26px; animation-delay: 0.6s; }
+    .wave-bar:nth-child(8) { height: 16px; animation-delay: 0.7s; }
+
+    @keyframes wave {
+      0%, 100% { transform: scaleY(0.5); opacity: 0.5; }
+      50% { transform: scaleY(1); opacity: 1; }
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .hero { padding: 120px 20px 60px; }
+      .stats-bar { flex-direction: column; gap: 24px; padding: 40px 20px; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border); padding: 0 0 24px; }
+      .stat-item:last-child { border-bottom: none; padding-bottom: 0; }
+      section { padding: 60px 20px; }
+      .features-grid { grid-template-columns: 1fr; }
+      .bmc-inner { grid-template-columns: 1fr; gap: 40px; padding: 60px 20px; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 24px; padding: 32px 20px; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">
+      <div class="nav-logo-icon">
+        <img src="logo.png" alt="ThreatPulse" />
+      </div>
+      ThreatPulse
+    </a>
+    <div class="nav-cta">
+      <a href="#pricing" class="btn btn-ghost">Pricing</a>
+      <a href="#" class="btn btn-primary">Download Free</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="pulse-rings">
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="ring"></div>
+    </div>
+
+    <img src="logo.png" alt="ThreatPulse" style="width: 180px; height: 180px; object-fit: contain; margin-bottom: 8px; opacity: 0; animation: fadeUp 0.8s ease forwards 0.1s;" />
+
+    <p class="hero-eyebrow">Cybersecurity Intelligence · iOS</p>
+
+    <h1 class="hero-title">
+      The pulse of your<br/><span>security stack.</span>
+    </h1>
+
+    <p class="hero-sub">
+      Real-time CVE alerts for the vendors you actually run.
+      Every morning. One tap. Your threat briefing is ready.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#" class="app-store-btn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Download on the App Store
+      </a>
+      <a href="#features" class="btn btn-ghost">See features →</a>
+    </div>
+
+    <div class="hero-ticker">
+      <div class="ticker-dot"></div>
+      Live CVE data from NIST NVD · CISA KEV · Updated daily
+    </div>
+  </div>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-value">130+</div>
+      <div class="stat-label">Vendors tracked</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">NVD</div>
+      <div class="stat-label">NIST data source</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">CISA</div>
+      <div class="stat-label">KEV catalog</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">Free</div>
+      <div class="stat-label">To get started</div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section id="features">
+    <p class="section-eyebrow reveal">Built for security professionals</p>
+    <h2 class="section-title reveal">Everything you need.<br/>Nothing you don't.</h2>
+    <p class="section-sub reveal">ThreatPulse cuts through the noise. Pick your vendors, get your briefing, stay ahead of threats — without the analyst overhead.</p>
+
+    <div class="features-grid reveal">
+
+      <div class="feature-card" style="--accent: var(--critical)">
+        <div class="feature-icon" style="background: var(--critical-dim)">🎯</div>
+        <div class="feature-title">Your Stack. Your CVEs.</div>
+        <div class="feature-desc">Choose from 130+ vendors. ThreatPulse monitors only what you run — Fortinet, Check Point, Palo Alto, CrowdStrike, and more. No noise from vendors you don't care about.</div>
+      </div>
+
+      <div class="feature-card" style="--accent: var(--warning)">
+        <div class="feature-icon" style="background: var(--warning-dim)">⚡</div>
+        <div class="feature-title">CISA KEV Integration</div>
+        <div class="feature-desc">Know instantly if a vulnerability in your stack is being actively exploited in the wild. CISA's Known Exploited Vulnerabilities catalog — matched to your vendors, every day.</div>
+      </div>
+
+      <div class="feature-card" style="--accent: var(--primary)">
+        <div class="feature-icon" style="background: var(--primary-dim)">🤖</div>
+        <div class="feature-title">Intel AI Assistant</div>
+        <div class="feature-desc">Ask anything about CVEs, vendors, attack techniques, or patch guidance. Powered by Llama 3.3 70B — a cybersecurity-only assistant that actually knows what it's talking about.</div>
+      </div>
+
+      <div class="feature-card" style="--accent: var(--info)">
+        <div class="feature-icon" style="background: rgba(55,138,221,0.12)">📰</div>
+        <div class="feature-title">Cyber News Feed</div>
+        <div class="feature-desc">The Hacker News, Krebs, BleepingComputer, CISA Alerts, Dark Reading and more — filtered by category. Ransomware, zero-days, breaches — your morning read, curated.</div>
+      </div>
+
+      <div class="feature-card" style="--accent: var(--primary)">
+        <div class="feature-icon" style="background: var(--primary-dim)">✅</div>
+        <div class="feature-title">Confirm & Track Patches</div>
+        <div class="feature-desc">Swipe to confirm a CVE patched. Your threat score updates instantly. Keep a clear record of what's been remediated — without a spreadsheet.</div>
+      </div>
+
+      <div class="feature-card" style="--accent: var(--warning)">
+        <div class="feature-icon" style="background: var(--warning-dim)">📄</div>
+        <div class="feature-title">Brief My Customer</div>
+        <div class="feature-desc">One tap generates a branded PDF security briefing — threat score, vendor breakdown, active CVEs, confirmed patches. Share via email, Slack, or AirDrop. Walk into every meeting prepared.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BRIEF MY CUSTOMER SPOTLIGHT -->
+  <div class="bmc-section">
+    <div class="bmc-inner">
+      <div>
+        <p class="section-eyebrow reveal">Pro feature</p>
+        <h2 class="section-title reveal">Brief your customer<br/>in one tap.</h2>
+        <p class="section-sub reveal" style="margin-bottom: 24px">Walk into every customer meeting with a professional, branded security briefing. ThreatPulse generates a PDF report from your live stack data — no manual work required.</p>
+        <p class="section-sub reveal" style="font-size: 14px; color: var(--text3)">Perfect for VARs, MSSPs, and security consultants. Share via email, Teams, Slack, or AirDrop in seconds.</p>
+        <div style="margin-top: 32px" class="reveal">
+          <div class="waveform" style="margin-bottom: 16px">
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+          </div>
+          <p style="font-family: var(--font-mono); font-size: 11px; color: var(--text3); letter-spacing: 1px">THREATPULSE PRO · $7.99/MO · 7-DAY FREE TRIAL</p>
+        </div>
+      </div>
+
+      <div class="bmc-report reveal">
+        <div class="bmc-report-header">
+          <div>
+            <div style="font-family: var(--font-display); font-weight: 800; font-size: 15px; color: var(--text)">ThreatPulse</div>
+            <div style="font-family: var(--font-mono); font-size: 9px; color: var(--primary); margin-top: 1px">Security Threat Briefing</div>
+          </div>
+          <div style="text-align: right">
+            <div class="bmc-report-date">April 15, 2026</div>
+            <div style="font-family: var(--font-mono); font-size: 9px; color: var(--text3); margin-top: 1px">Prepared for Acme Corp</div>
+          </div>
+        </div>
+
+        <div class="bmc-report-body">
+          <div class="bmc-stat-row">
+            <div class="bmc-stat">
+              <div class="bmc-stat-val score-crit">8.4</div>
+              <div class="bmc-stat-lbl">THREAT SCORE</div>
+            </div>
+            <div class="bmc-stat">
+              <div class="bmc-stat-val" style="color: var(--text2)">6</div>
+              <div class="bmc-stat-lbl">VENDORS</div>
+            </div>
+            <div class="bmc-stat">
+              <div class="bmc-stat-val score-crit">28</div>
+              <div class="bmc-stat-lbl">ACTIVE CVEs</div>
+            </div>
+            <div class="bmc-stat">
+              <div class="bmc-stat-val score-ok">5</div>
+              <div class="bmc-stat-lbl">PATCHED</div>
+            </div>
+          </div>
+
+          <div style="font-family: var(--font-mono); font-size: 8px; letter-spacing: 1.5px; color: var(--text3); margin-bottom: 8px">VENDOR STACK ANALYSIS</div>
+
+          <div class="bmc-vendor-row">
+            <div>
+              <div class="bmc-vendor-name">Fortinet</div>
+              <div style="font-family: var(--font-mono); font-size: 9px; color: var(--text3)">Firewall / NGFW</div>
+            </div>
+            <div class="bmc-vendor-meta score-crit">Critical · 10 CVEs</div>
+          </div>
+
+          <div class="bmc-vendor-row">
+            <div>
+              <div class="bmc-vendor-name">OpenSSL</div>
+              <div style="font-family: var(--font-mono); font-size: 9px; color: var(--text3)">Runtimes & OS</div>
+            </div>
+            <div class="bmc-vendor-meta score-warn">Elevated · 8 CVEs</div>
+          </div>
+
+          <div class="bmc-vendor-row">
+            <div>
+              <div class="bmc-vendor-name">Check Point</div>
+              <div style="font-family: var(--font-mono); font-size: 9px; color: var(--text3)">Firewall / NGFW</div>
+            </div>
+            <div class="bmc-vendor-meta score-ok">Clear</div>
+          </div>
+
+          <div style="font-family: var(--font-mono); font-size: 9px; color: var(--text3); text-align: center; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border)">Generated by ThreatPulse · threatpulse.app</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DATA SOURCES -->
+  <section>
+    <p class="section-eyebrow reveal">Trusted data</p>
+    <h2 class="section-title reveal">Powered by the sources<br/>security teams trust.</h2>
+    <p class="section-sub reveal">ThreatPulse pulls from authoritative, free public APIs. No third-party data brokers. No scraped feeds.</p>
+
+    <div class="sources-row reveal">
+      <div class="source-pill"><div class="source-dot"></div>NIST National Vulnerability Database</div>
+      <div class="source-pill"><div class="source-dot"></div>CISA Known Exploited Vulnerabilities</div>
+      <div class="source-pill"><div class="source-dot" style="background: var(--warning)"></div>The Hacker News</div>
+      <div class="source-pill"><div class="source-dot" style="background: var(--warning)"></div>Krebs on Security</div>
+      <div class="source-pill"><div class="source-dot" style="background: var(--warning)"></div>BleepingComputer</div>
+      <div class="source-pill"><div class="source-dot" style="background: var(--warning)"></div>Dark Reading</div>
+      <div class="source-pill"><div class="source-dot" style="background: var(--info)"></div>CISA Alerts RSS</div>
+      <div class="source-pill"><div class="source-dot" style="background: var(--info)"></div>Recorded Future</div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <p class="section-eyebrow reveal">Simple pricing</p>
+    <h2 class="section-title reveal">Start free.<br/>Go Pro when you're ready.</h2>
+    <p class="section-sub reveal">No credit card required to get started. 7-day free trial of Pro included.</p>
+
+    <div class="pricing-grid reveal">
+      <div class="pricing-card">
+        <div class="pricing-tier">FREE</div>
+        <div class="pricing-price">$0</div>
+        <div class="pricing-desc">Forever free</div>
+        <ul class="pricing-features">
+          <li>2 vendors monitored</li>
+          <li>Daily CVE briefing</li>
+          <li>Cyber news feed</li>
+          <li>5 Intel AI queries/day</li>
+          <li class="muted">CISA KEV alerts</li>
+          <li class="muted">TL;DR AI summaries</li>
+          <li class="muted">Brief My Customer PDF</li>
+          <li class="muted">Unlimited vendors</li>
+        </ul>
+      </div>
+
+      <div class="pricing-card featured">
+        <div class="pricing-badge">MOST POPULAR</div>
+        <div class="pricing-tier">PRO</div>
+        <div class="pricing-price">$7.99<span>/mo</span></div>
+        <div class="pricing-desc">7-day free trial</div>
+        <ul class="pricing-features">
+          <li>Unlimited vendors</li>
+          <li>Real-time CVE alerts</li>
+          <li>CISA KEV feed + badges</li>
+          <li>TL;DR AI summaries</li>
+          <li>Brief My Customer PDF</li>
+          <li>Unlimited Intel AI</li>
+          <li>Patch deadline tracking</li>
+          <li>Ransomware flags</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      <div class="footer-brand">ThreatPulse</div>
+      <div class="footer-sub">by Kray Kray Studios · Ottawa, Canada</div>
+    </div>
+    <div class="footer-links">
+      <a href="/threatpulse/privacy">Privacy Policy</a>
+      <a href="mailto:support@kraykraystudios.com">Support</a>
+      <a href="#">App Store</a>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, 100);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
