@@ -920,6 +920,9 @@
       .sources-row { gap: 8px; }
       .source-pill { font-size: 11px; padding: 8px 14px; }
 
+      /* Roadmap */
+      .roadmap-grid { grid-template-columns: 1fr !important; }
+
       /* Footer */
       footer {
         flex-direction: column;
@@ -1205,6 +1208,121 @@
       </div>
     </div>
   </section>
+
+  <!-- ROADMAP -->
+  <div style="background: var(--card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <section style="max-width: 1100px; margin: 0 auto; padding: 100px 48px;">
+      <p class="section-eyebrow reveal">What's coming</p>
+      <h2 class="section-title reveal">Built to grow<br/>with your stack.</h2>
+      <p class="section-sub reveal">ThreatPulse is just getting started. Here's a glimpse of what's on the horizon.</p>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 60px;" class="reveal roadmap-grid">
+
+        <!-- v1.1 -->
+        <div style="background: var(--bg2); border: 1px solid var(--border2); border-radius: 16px; padding: 32px; position: relative; overflow: hidden;">
+          <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--primary), transparent);"></div>
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 24px;">
+            <div style="background: var(--primary-dim); border: 1px solid rgba(29,158,117,0.25); border-radius: 6px; padding: 4px 12px;">
+              <span style="font-family: var(--font-mono); font-size: 11px; color: var(--primary); letter-spacing: 1px;">v1.1</span>
+            </div>
+            <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text3);">Coming soon</span>
+          </div>
+
+          <div style="font-family: var(--font-display); font-size: 20px; font-weight: 700; margin-bottom: 20px; color: var(--text);">Deeper Intelligence</div>
+
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div style="display: flex; align-items: flex-start; gap: 12px;">
+              <span style="color: var(--primary); font-size: 14px; margin-top: 1px; flex-shrink: 0;">→</span>
+              <div>
+                <div style="font-family: var(--font-display); font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px;">EPSS Exploit Scoring</div>
+                <div style="font-size: 13px; color: var(--text3); font-weight: 300; line-height: 1.5;">See the probability a CVE gets exploited in the next 30 days, not just its severity score.</div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: flex-start; gap: 12px;">
+              <span style="color: var(--primary); font-size: 14px; margin-top: 1px; flex-shrink: 0;">→</span>
+              <div>
+                <div style="font-family: var(--font-display); font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px;">Threat Actor Attribution</div>
+                <div style="font-size: 13px; color: var(--text3); font-weight: 300; line-height: 1.5;">Know which threat groups are actively targeting your vendors via AlienVault OTX.</div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: flex-start; gap: 12px;">
+              <span style="color: var(--primary); font-size: 14px; margin-top: 1px; flex-shrink: 0;">→</span>
+              <div>
+                <div style="font-family: var(--font-display); font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px;">Home Screen Widget</div>
+                <div style="font-size: 13px; color: var(--text3); font-weight: 300; line-height: 1.5;">Your threat score at a glance, without opening the app.</div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: flex-start; gap: 12px;">
+              <span style="color: var(--primary); font-size: 14px; margin-top: 1px; flex-shrink: 0;">→</span>
+              <div>
+                <div style="font-family: var(--font-display); font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px;">Team Subscriptions</div>
+                <div style="font-size: 13px; color: var(--text3); font-weight: 300; line-height: 1.5;">Share a stack with your team. One source of truth for your whole security team.</div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: flex-start; gap: 12px;">
+              <span style="color: var(--primary); font-size: 14px; margin-top: 1px; flex-shrink: 0;">→</span>
+              <div>
+                <div style="font-family: var(--font-display); font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px;">Real-Time Push Alerts</div>
+                <div style="font-size: 13px; color: var(--text3); font-weight: 300; line-height: 1.5;">Instant notifications the moment a critical CVE drops for your vendors.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- v2 -->
+        <div style="background: var(--bg2); border: 1px solid var(--border2); border-radius: 16px; padding: 32px; position: relative; overflow: hidden;">
+          <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--info), transparent);"></div>
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 24px;">
+            <div style="background: rgba(55,138,221,0.1); border: 1px solid rgba(55,138,221,0.25); border-radius: 6px; padding: 4px 12px;">
+              <span style="font-family: var(--font-mono); font-size: 11px; color: var(--info); letter-spacing: 1px;">v2</span>
+            </div>
+            <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text3);">On the horizon</span>
+          </div>
+
+          <div style="font-family: var(--font-display); font-size: 20px; font-weight: 700; margin-bottom: 20px; color: var(--text);">Enterprise Ready</div>
+
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div style="display: flex; align-items: flex-start; gap: 12px;">
+              <span style="color: var(--info); font-size: 14px; margin-top: 1px; flex-shrink: 0;">→</span>
+              <div>
+                <div style="font-family: var(--font-display); font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px;">Compliance Mode</div>
+                <div style="font-size: 13px; color: var(--text3); font-weight: 300; line-height: 1.5;">Map your CVEs to SOC 2, PCI DSS, HIPAA, and NIST frameworks automatically.</div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: flex-start; gap: 12px;">
+              <span style="color: var(--info); font-size: 14px; margin-top: 1px; flex-shrink: 0;">→</span>
+              <div>
+                <div style="font-family: var(--font-display); font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px;">Vendor Security Scorecard</div>
+                <div style="font-size: 13px; color: var(--text3); font-weight: 300; line-height: 1.5;">Historical vulnerability trends per vendor. Know which vendors are improving and which aren't.</div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: flex-start; gap: 12px;">
+              <span style="color: var(--info); font-size: 14px; margin-top: 1px; flex-shrink: 0;">→</span>
+              <div>
+                <div style="font-family: var(--font-display); font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px;">GreyNoise Integration</div>
+                <div style="font-size: 13px; color: var(--text3); font-weight: 300; line-height: 1.5;">See if your vulnerable endpoints are being actively scanned on the internet right now.</div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: flex-start; gap: 12px;">
+              <span style="color: var(--info); font-size: 14px; margin-top: 1px; flex-shrink: 0;">→</span>
+              <div>
+                <div style="font-family: var(--font-display); font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px;">Android</div>
+                <div style="font-size: 13px; color: var(--text3); font-weight: 300; line-height: 1.5;">ThreatPulse coming to Android. Same intelligence, cross-platform.</div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: flex-start; gap: 12px;">
+              <span style="color: var(--info); font-size: 14px; margin-top: 1px; flex-shrink: 0;">→</span>
+              <div>
+                <div style="font-family: var(--font-display); font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px;">Community Stack Insights</div>
+                <div style="font-size: 13px; color: var(--text3); font-weight: 300; line-height: 1.5;">Anonymous benchmarking — see how your patch velocity compares to peers in your industry.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
 
   <!-- FOOTER -->
   <footer>
