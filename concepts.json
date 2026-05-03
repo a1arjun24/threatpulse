@@ -1,0 +1,244 @@
+{
+  "concepts": [
+    {
+      "id": 1,
+      "term": "CVE",
+      "category": "Vulnerability Management",
+      "definition": "Common Vulnerabilities and Exposures (CVE) is a standardized identifier for publicly known cybersecurity vulnerabilities. Each CVE has a unique ID, description, and references.",
+      "why_it_matters": "CVEs give security teams a common language to discuss and prioritize vulnerabilities across vendors and tools.",
+      "example": "CVE-2021-44228 is the identifier for Log4Shell, one of the most critical vulnerabilities ever discovered."
+    },
+    {
+      "id": 2,
+      "term": "CVSS",
+      "category": "Vulnerability Management",
+      "definition": "Common Vulnerability Scoring System (CVSS) is a standardized framework for rating the severity of security vulnerabilities on a scale of 0 to 10.",
+      "why_it_matters": "CVSS scores help security teams prioritize which vulnerabilities to patch first based on severity and exploitability.",
+      "example": "A CVSS score of 9.8 (Critical) means the vulnerability is easily exploitable remotely and causes significant impact."
+    },
+    {
+      "id": 3,
+      "term": "Zero-Day",
+      "category": "Threat Intelligence",
+      "definition": "A zero-day is a vulnerability that is unknown to the vendor and has no available patch. Attackers who discover zero-days have a significant advantage.",
+      "why_it_matters": "Zero-days are extremely dangerous because there is no patch available, leaving organizations exposed until the vendor issues a fix.",
+      "example": "The Stuxnet worm used four zero-day vulnerabilities simultaneously to attack Iranian nuclear facilities."
+    },
+    {
+      "id": 4,
+      "term": "Threat Actor",
+      "category": "Threat Intelligence",
+      "definition": "A threat actor is any individual, group, or organization that conducts malicious cyber activity. They range from script kiddies to nation-state groups.",
+      "why_it_matters": "Understanding who is targeting your industry helps you prioritize defenses and anticipate attack techniques.",
+      "example": "APT29 (Cozy Bear) is a Russian state-sponsored threat actor known for targeting government and healthcare organizations."
+    },
+    {
+      "id": 5,
+      "term": "CISA KEV",
+      "category": "Vulnerability Management",
+      "definition": "The CISA Known Exploited Vulnerabilities catalog is a list of vulnerabilities actively exploited in the wild, maintained by the U.S. Cybersecurity and Infrastructure Security Agency.",
+      "why_it_matters": "If a CVE is in the KEV catalog, real attackers are using it right now. These should be patched immediately.",
+      "example": "CISA requires federal agencies to patch KEV vulnerabilities within 15 days of being added to the catalog."
+    },
+    {
+      "id": 6,
+      "term": "Ransomware",
+      "category": "Malware",
+      "definition": "Ransomware is malware that encrypts a victim's files and demands payment in exchange for the decryption key.",
+      "why_it_matters": "Ransomware attacks can shut down entire organizations and cost millions in recovery, ransom payments, and reputational damage.",
+      "example": "The Colonial Pipeline attack in 2021 disrupted fuel supplies across the U.S. East Coast and resulted in a $4.4 million ransom payment."
+    },
+    {
+      "id": 7,
+      "term": "Lateral Movement",
+      "category": "Attack Techniques",
+      "definition": "Lateral movement refers to techniques attackers use to progressively move through a network after gaining initial access, seeking higher privileges and valuable data.",
+      "why_it_matters": "Detecting lateral movement early can prevent attackers from reaching critical systems even after an initial breach.",
+      "example": "An attacker compromises a low-privilege workstation, then uses pass-the-hash to move laterally to a domain controller."
+    },
+    {
+      "id": 8,
+      "term": "Phishing",
+      "category": "Social Engineering",
+      "definition": "Phishing is a social engineering attack that tricks users into revealing credentials or installing malware by impersonating a trusted entity via email, SMS, or other channels.",
+      "why_it_matters": "Phishing is the most common initial access vector for breaches. A single click can compromise an entire organization.",
+      "example": "A spear phishing email targeting a CFO impersonates the CEO and requests an urgent wire transfer."
+    },
+    {
+      "id": 9,
+      "term": "MFA",
+      "category": "Identity & Access",
+      "definition": "Multi-Factor Authentication (MFA) requires users to provide two or more verification factors to gain access — typically something you know, something you have, and something you are.",
+      "why_it_matters": "MFA blocks over 99% of automated account compromise attacks even if passwords are stolen.",
+      "example": "Logging into a VPN with a password plus a one-time code from an authenticator app is MFA."
+    },
+    {
+      "id": 10,
+      "term": "Patch Tuesday",
+      "category": "Vulnerability Management",
+      "definition": "Patch Tuesday is Microsoft's monthly release of security updates, occurring on the second Tuesday of each month. Many vendors follow a similar cadence.",
+      "why_it_matters": "Attackers reverse-engineer patches immediately after release to develop exploits — organizations that delay patching are at significant risk.",
+      "example": "Microsoft released patches for over 100 vulnerabilities on a single Patch Tuesday in 2023."
+    },
+    {
+      "id": 11,
+      "term": "SOC",
+      "category": "Security Operations",
+      "definition": "A Security Operations Center (SOC) is a team of security professionals who monitor, detect, analyze, and respond to cybersecurity incidents around the clock.",
+      "why_it_matters": "A SOC provides continuous visibility into an organization's security posture and reduces the time to detect and respond to threats.",
+      "example": "A SOC analyst receives a SIEM alert at 2am about unusual outbound traffic and investigates a potential data exfiltration attempt."
+    },
+    {
+      "id": 12,
+      "term": "SIEM",
+      "category": "Security Operations",
+      "definition": "Security Information and Event Management (SIEM) is a system that aggregates and analyzes log data from across an organization's IT infrastructure to detect threats.",
+      "why_it_matters": "SIEMs provide centralized visibility and correlation of security events, making it possible to detect attacks that span multiple systems.",
+      "example": "Splunk and Microsoft Sentinel are popular SIEM platforms used by enterprise security teams."
+    },
+    {
+      "id": 13,
+      "term": "Privilege Escalation",
+      "category": "Attack Techniques",
+      "definition": "Privilege escalation is when an attacker gains higher levels of access than initially obtained — either vertically (user to admin) or horizontally (one user to another).",
+      "why_it_matters": "Most high-impact attacks require elevated privileges. Detecting privilege escalation early can stop an attack before it causes major damage.",
+      "example": "An attacker exploits a local privilege escalation vulnerability to gain SYSTEM-level access on a Windows machine."
+    },
+    {
+      "id": 14,
+      "term": "Threat Hunting",
+      "category": "Security Operations",
+      "definition": "Threat hunting is the proactive practice of searching through networks and systems to detect advanced threats that evade automated security tools.",
+      "why_it_matters": "Sophisticated attackers can remain undetected for months. Threat hunting reduces dwell time by actively looking for indicators of compromise.",
+      "example": "A threat hunter searches for unusual PowerShell execution patterns that might indicate a living-off-the-land attack."
+    },
+    {
+      "id": 15,
+      "term": "Supply Chain Attack",
+      "category": "Threat Intelligence",
+      "definition": "A supply chain attack targets less-secure elements in a software or hardware supply chain to compromise the ultimate target — often through a trusted software update or third-party library.",
+      "why_it_matters": "Supply chain attacks can compromise thousands of organizations simultaneously through a single trusted vendor.",
+      "example": "The SolarWinds attack compromised a software update mechanism to deliver malware to 18,000 organizations including U.S. government agencies."
+    },
+    {
+      "id": 16,
+      "term": "EDR",
+      "category": "Endpoint Security",
+      "definition": "Endpoint Detection and Response (EDR) is a security solution that continuously monitors endpoints for suspicious activity and provides detection, investigation, and response capabilities.",
+      "why_it_matters": "EDR goes beyond traditional antivirus by detecting behavioral anomalies and providing forensic data for incident response.",
+      "example": "CrowdStrike Falcon and SentinelOne are leading EDR platforms used by enterprise security teams."
+    },
+    {
+      "id": 17,
+      "term": "IOC",
+      "category": "Threat Intelligence",
+      "definition": "Indicators of Compromise (IOCs) are artifacts that suggest a system may have been compromised — including malicious IP addresses, file hashes, domain names, and registry keys.",
+      "why_it_matters": "Sharing IOCs between organizations allows the security community to detect and block known threats faster.",
+      "example": "After a breach, the IR team extracts file hashes and C2 IP addresses as IOCs to share with their ISAC."
+    },
+    {
+      "id": 18,
+      "term": "Attack Surface",
+      "category": "Risk Management",
+      "definition": "The attack surface is the total sum of different points where an attacker can try to enter or extract data from an environment — including software, hardware, and human vectors.",
+      "why_it_matters": "Reducing your attack surface is one of the most effective ways to improve security posture. Fewer exposure points means fewer opportunities for attackers.",
+      "example": "Disabling unused ports, removing legacy software, and enforcing MFA all reduce the attack surface."
+    },
+    {
+      "id": 19,
+      "term": "Defense in Depth",
+      "category": "Security Architecture",
+      "definition": "Defense in depth is a security strategy that uses multiple layers of controls so that if one layer fails, others still provide protection.",
+      "why_it_matters": "No single security control is perfect. Layered defenses ensure that attackers must bypass multiple barriers to succeed.",
+      "example": "A network protected by a firewall, IDS, EDR, and MFA represents defense in depth — each layer compensates for weaknesses in the others."
+    },
+    {
+      "id": 20,
+      "term": "TTP",
+      "category": "Threat Intelligence",
+      "definition": "Tactics, Techniques, and Procedures (TTPs) describe how threat actors operate — their goals, the methods they use to achieve them, and the specific tools and procedures they employ.",
+      "why_it_matters": "Understanding TTPs allows defenders to anticipate attacker behavior and build detections that work even when specific malware changes.",
+      "example": "MITRE ATT&CK is a globally accessible knowledge base of adversary TTPs used by security teams worldwide."
+    },
+    {
+      "id": 21,
+      "term": "Vulnerability Window",
+      "category": "Vulnerability Management",
+      "definition": "The vulnerability window is the time between when a vulnerability is discovered or disclosed and when a patch is applied. Attackers weaponize CVEs in as little as 21 days.",
+      "why_it_matters": "The shorter your vulnerability window, the less exposure you have. Every day without a patch is a day attackers can exploit the flaw.",
+      "example": "Organizations that patched Log4Shell within 72 hours of disclosure avoided the majority of exploitation attempts."
+    },
+    {
+      "id": 22,
+      "term": "Incident Response",
+      "category": "Security Operations",
+      "definition": "Incident response (IR) is the structured approach to handling and managing the aftermath of a security breach or cyberattack with the goal of limiting damage and reducing recovery time.",
+      "why_it_matters": "A well-practiced IR plan can mean the difference between a minor incident and a catastrophic breach.",
+      "example": "When ransomware hits, an IR team follows a predefined playbook: isolate affected systems, preserve evidence, notify stakeholders, and restore from backups."
+    },
+    {
+      "id": 23,
+      "term": "Zero Trust",
+      "category": "Security Architecture",
+      "definition": "Zero Trust is a security model based on the principle of never trust, always verify — no user or device is trusted by default, even inside the network perimeter.",
+      "why_it_matters": "Traditional perimeter-based security fails when attackers are already inside. Zero Trust limits lateral movement and blast radius.",
+      "example": "A Zero Trust architecture requires every access request to be authenticated, authorized, and continuously validated regardless of network location."
+    },
+    {
+      "id": 24,
+      "term": "CVE Weaponization",
+      "category": "Vulnerability Management",
+      "definition": "CVE weaponization is the process by which attackers develop a working exploit for a newly disclosed vulnerability and deploy it in real attacks.",
+      "why_it_matters": "Research shows attackers can weaponize a CVE in as little as 21 days after public disclosure — making rapid patching critical.",
+      "example": "Within days of the MOVEit vulnerability disclosure, the Cl0p ransomware group had already weaponized it and was attacking organizations globally."
+    },
+    {
+      "id": 25,
+      "term": "NGFW",
+      "category": "Network Security",
+      "definition": "A Next-Generation Firewall (NGFW) is an advanced firewall that goes beyond port and protocol inspection to include application awareness, intrusion prevention, and threat intelligence integration.",
+      "why_it_matters": "Traditional firewalls cannot detect modern attacks that operate over legitimate ports. NGFWs provide deeper visibility and control.",
+      "example": "Palo Alto Networks, Fortinet, and Check Point are leading NGFW vendors used in enterprise environments."
+    },
+    {
+      "id": 26,
+      "term": "Credential Stuffing",
+      "category": "Attack Techniques",
+      "definition": "Credential stuffing is an attack where stolen username and password combinations from one breach are used to attempt login to other services, exploiting password reuse.",
+      "why_it_matters": "With billions of credentials available on the dark web, any user who reuses passwords across services is at risk.",
+      "example": "After a major retail breach, attackers use the leaked credentials to attempt logins on banking sites — successfully accessing accounts where users reused the same password."
+    },
+    {
+      "id": 27,
+      "term": "EPSS",
+      "category": "Vulnerability Management",
+      "definition": "The Exploit Prediction Scoring System (EPSS) is a data-driven model that estimates the probability a CVE will be exploited in the wild within the next 30 days.",
+      "why_it_matters": "CVSS tells you how severe a vulnerability is — EPSS tells you how likely it is to be exploited. Together they help teams prioritize more effectively.",
+      "example": "A CVE with a CVSS of 7.5 but an EPSS of 0.85 should be prioritized over a CVSS 9.0 with an EPSS of 0.02."
+    },
+    {
+      "id": 28,
+      "term": "API Security",
+      "category": "Application Security",
+      "definition": "API security encompasses the practices and tools used to protect application programming interfaces from attack, including authentication, authorization, rate limiting, and input validation.",
+      "why_it_matters": "APIs are the backbone of modern applications and are increasingly targeted by attackers. A vulnerable API can expose all backend data.",
+      "example": "The OWASP API Security Top 10 lists broken object level authorization as the most common and dangerous API vulnerability."
+    },
+    {
+      "id": 29,
+      "term": "Dwell Time",
+      "category": "Security Operations",
+      "definition": "Dwell time is the length of time an attacker remains undetected inside a network after initial compromise. It is a key metric for measuring security effectiveness.",
+      "why_it_matters": "The longer an attacker dwells in your environment, the more damage they can do. Reducing dwell time limits breach impact significantly.",
+      "example": "The average dwell time globally is around 16 days — meaning attackers often have two weeks to move laterally before being detected."
+    },
+    {
+      "id": 30,
+      "term": "Patch Management",
+      "category": "Vulnerability Management",
+      "definition": "Patch management is the systematic process of acquiring, testing, and installing software updates to fix vulnerabilities and improve system security.",
+      "why_it_matters": "Unpatched systems are the leading cause of successful cyberattacks. A disciplined patch management program dramatically reduces risk.",
+      "example": "An organization with a 30-day patch SLA for critical vulnerabilities reduces its exploitable window by over 80% compared to quarterly patching cycles."
+    }
+  ]
+}
